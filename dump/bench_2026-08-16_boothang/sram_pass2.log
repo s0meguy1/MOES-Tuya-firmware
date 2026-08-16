@@ -1,0 +1,11 @@
+[pi_run] reset on BCM GPIO 17 via gpiozero; setDTR(True) drives it LOW
+=======================================================
+TLSR825x Flasher version 29.11.24
+-------------------------------------------------------
+Open /dev/ttyAMA0, 460800 baud...
+UART-SWS 46080 baud. SW-CLK ~24.9 MHz(?)
+swsdiv forced to 110
+Read SRAM 0x840000..0x850000 -> boothang_2026-08-16/sram_pass2.bin (65536 bytes)
+-------------------------------------------------------
+Worked Time: 151.484 sec
+Done!

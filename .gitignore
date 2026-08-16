@@ -1,0 +1,69 @@
+# ─────────────────────────────────────────────────────────────────────
+# Vendored upstream clones — each has its own .git and its own upstream.
+# 877 MB of the 888 MB tree lives here. Track these as submodules or
+# leave them out; do NOT commit them as plain files.
+# ─────────────────────────────────────────────────────────────────────
+/work/
+/TlsrComSwireWriter/
+
+# ─────────────────────────────────────────────────────────────────────
+# AI-session scratch / handoff notes.
+# These also leak internal network details into a PUBLIC repo:
+#   internal IPs (Pi with passwordless sudo, z2m host),
+#   ssh usernames, internal HTTP endpoints.
+# Sanitize before reinstating any of them.
+# FIRMWARE_STATUS.md / HANDOFF.md / PI_SWIRE_SETUP.md were reinstated
+# 2026-08-16 after a sanitization pass (placeholders for all internal
+# hosts/IPs/IEEEs).
+# ─────────────────────────────────────────────────────────────────────
+AI_AUDIT_BRIEF.md
+DEBUG_BRIEF.md
+POSTMORTEM_*.md
+REBUILD_NOTES.md
+SOLVED.md
+
+# AI-session analysis artifacts (regenerable scratch)
+ota_verify/
+
+# ─────────────────────────────────────────────────────────────────────
+# NOTE: flash dumps (/dump/), *.bin, and stock vendor firmware are
+# deliberately INCLUDED (owner's decision 2026-08-15) so others can
+# inspect them and propose changes. Don't re-add ignore rules for them.
+# ─────────────────────────────────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────
+# Build output
+# ─────────────────────────────────────────────────────────────────────
+*.o
+*.obj
+*.d
+*.a
+*.elf
+*.lst
+*.map
+*.s37
+build/
+output/
+
+# Toolchain archives / prebuilt host binaries
+*.tar.bz2
+*.tar.gz
+*.zip
+*.exe
+*.dll
+
+# ─────────────────────────────────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ─────────────────────────────────────────────────────────────────────
+# Editor / OS
+# ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store

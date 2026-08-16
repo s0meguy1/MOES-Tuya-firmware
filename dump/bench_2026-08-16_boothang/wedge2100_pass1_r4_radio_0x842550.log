@@ -1,0 +1,11 @@
+[pi_run] reset on BCM GPIO 17 via gpiozero; setDTR(True) drives it LOW
+=======================================================
+TLSR825x Flasher version 29.11.24
+-------------------------------------------------------
+Open /dev/ttyAMA0, 460800 baud...
+UART-SWS 46080 baud. SW-CLK ~24.9 MHz(?)
+swsdiv forced to 110
+Read SRAM 0x842550..0x842560 -> wedge2100/wedge2100_pass1_r4_radio_0x842550.bin (16 bytes)
+-------------------------------------------------------
+Worked Time: 3.711 sec
+Done!
