@@ -8,13 +8,9 @@
 
 # ─────────────────────────────────────────────────────────────────────
 # AI-session scratch / handoff notes.
-# These also leak internal network details into a PUBLIC repo:
-#   internal IPs (Pi with passwordless sudo, z2m host),
-#   ssh usernames, internal HTTP endpoints.
-# Sanitize before reinstating any of them.
-# FIRMWARE_STATUS.md / HANDOFF.md / PI_SWIRE_SETUP.md were reinstated
-# 2026-08-16 after a sanitization pass (placeholders for all internal
-# hosts/IPs/IEEEs).
+# These may contain private infrastructure details such as internal addresses,
+# host labels, usernames, and local service endpoints. Keep them local unless
+# they receive a fresh publication review.
 # ─────────────────────────────────────────────────────────────────────
 AI_AUDIT_BRIEF.md
 DEBUG_BRIEF.md
@@ -25,10 +21,44 @@ SOLVED.md
 # AI-session analysis artifacts (regenerable scratch)
 ota_verify/
 
+# Local operational notes stay private.  Existing tracked legacy documents
+# remain visible until deliberately removed from the index; this prevents a
+# `.gitignore` rule from quietly disguising a public-history problem.
+AI_BUGHUNT_BRIEF.md
+AI_SWARM_PLAYBOOK.md
+FIRMWARE_STATUS.md
+HANDOFF.md
+PI_SWIRE_SETUP.md
+HANDOVER*.md
+AI_*.md
+
+# Bench-only analysis and capture helpers.  Keep reusable source tools such as
+# dump/*.py trackable; these patterns intentionally cover only local runbooks,
+# logs, and hardware-specific scripts.
+dump/*_analysis*.md
+dump/capture_*.sh
+dump/flash_fixture_*.sh
+dump/*.log
+
+# Private hardware captures.  Do not use a global `*.bin` rule: source and
+# deliberately distributable firmware artifacts may still need to be tracked.
+dump/bench_*/
+dump/dump_*.bin
+dump/zt3l_MERGED.bin
+dump/zt3l_MERGED.bin.sha256
+dump/zt3l_full*.bin
+dump/zt3l_full*.sha*
+dump/*sram*.bin
+dump/*nv*.bin
+dump/*full*.bin
+dump/private*/
+tuya_plug_old.bin
+tuya_plug_stock.bin
+
 # ─────────────────────────────────────────────────────────────────────
-# NOTE: flash dumps (/dump/), *.bin, and stock vendor firmware are
-# deliberately INCLUDED (owner's decision 2026-08-15) so others can
-# inspect them and propose changes. Don't re-add ignore rules for them.
+# Local captures and operational handoffs are not public release material.
+# See the narrow capture rules above; release/source firmware is intentionally
+# not blanket-ignored.
 # ─────────────────────────────────────────────────────────────────────
 
 # ─────────────────────────────────────────────────────────────────────
