@@ -55,6 +55,29 @@ dump/private*/
 tuya_plug_old.bin
 tuya_plug_stock.bin
 
+# Captures also land in dated per-fixture subdirectories, which the top-level
+# `dump/*` rules above cannot see. Mirror them one level down rather than
+# adding a blanket `*.bin`, so distributable firmware artifacts stay trackable.
+dump/*_fixture_*/
+dump/*_wedged_*/
+dump/*_restore*/
+dump/**/*full*.bin
+dump/**/*sram*.bin
+dump/**/*nv*.bin
+
+# Session journals, agent state and bench scratch. These carry per-device
+# addresses, internal hostnames and local service endpoints, and are the exact
+# material the firmware checkout's publication guard is designed to catch.
+JOURNAL_*.md
+SKILL_STATE.json
+last-actions.txt
+currentpinout.txt
+
+# Bench photographs and screenshots: wiring, labels and addresses are legible
+# in these even when the filename looks harmless.
+PXL_*.jpg
+Screenshot_*.png
+
 # ─────────────────────────────────────────────────────────────────────
 # Local captures and operational handoffs are not public release material.
 # See the narrow capture rules above; release/source firmware is intentionally
