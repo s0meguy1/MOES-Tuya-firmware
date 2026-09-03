@@ -1,13 +1,44 @@
 # MOES / ZT3L firmware research
 
 > **Experimental research, not a firmware release.** The over-the-air conversion
-> path now works end to end on real hardware, but this has been carried on two
-> fixtures over hours — not a fleet, a duration, or a field-power proof. Use only
-> on hardware you can recover with a dedicated programmer, and take a full flash
-> backup first.
+> path works end to end, and the firmware now runs a nineteen-fixture
+> installation across three rooms — through conversions from stock, mains power
+> cycles and day-scale operation. It has still had no long soak and no
+> independent reproduction. Use only on hardware you can recover with a
+> dedicated programmer, and take a full flash backup first.
 
 An experimental workspace for Moes RGB+CCT downlights (`TS0505B`) built on the
 Tuya ZT3L module (Telink TLSR8258).
+
+## What it looks like
+
+Both clips are one bench fixture running the on-device light-show engine. The
+effect is rendered on the chip; the network is only told *which* effect to run,
+not fed a frame at a time. One group broadcast runs a whole room.
+
+| flash | multi-scene |
+| :---: | :---: |
+| ![A downlight strobing red on a bench](media/light-show-flash.gif) | ![A downlight stepping through red, cyan and green](media/light-show-multi-scene.gif) |
+
+Fifteen effects, a 32-step cue list the chip plays by itself, and per-fixture
+phase offsets so a single broadcast becomes a chase across a room. Full
+reference:
+[`docs/light_show.md`](https://github.com/s0meguy1/tuyaZigbee/blob/main/docs/light_show.md).
+
+## The hardware
+
+The exact parts this work was done on. No affiliation, no referral codes —
+they are here so you can check you have the same board before flashing anything.
+
+- **The light** — Moes ZB-TDD6-RCW-4 RGB+CCT downlight:
+  <https://www.aliexpress.us/item/3256806801178235.html>
+- **The bare module** — Tuya ZT3L (Telink TLSR8258), for a spare or a repair:
+  <https://www.aliexpress.us/item/3256809199488861.html>
+
+AliExpress sellers change what a listing ships without changing the listing.
+Confirm before you flash: zigbee2mqtt should report the device as `TS0505B` /
+`_TZ3210_b8jdosxo`, its IEEE address should begin `0xa4c138` (a Telink chip),
+and the module inside should be marked `ZT3L`.
 
 ## Start here
 
@@ -41,6 +72,12 @@ What is established on hardware:
 - **Custom-to-custom OTA works.** A fixture was updated across successive builds
   keeping its address, interview and network state, with permit-join closed.
 - **Stock-to-custom conversion works**, delivered by explicit per-device URL.
+- **It runs as an installation, not a demo.** Nineteen fixtures in three rooms
+  have been carried across successive builds over the air, including conversions
+  from stock and mains power cycles. The current build reached eighteen of them
+  unattended overnight; the last refused to start a transfer and is still on the
+  previous build, lit and controllable. A failed transfer leaves the fixture
+  running the build it already had.
 - **A wired write path is validated.** A converted fixture was restored to stock
   over SWire — stock app and config written, NV and staging erased, identity and
   RF calibration untouched — and confirmed by a full read-back, then converted
@@ -51,8 +88,9 @@ What is established on hardware:
 
 What is **not** established:
 
-- Any fleet, duration, or long-term field-power result.
-- Effects, a mains power cycle, and a soak on the current build.
+- A long soak on the current build.
+- **Any independent reproduction.** Every result here comes from one person's
+  installation, on one model of fixture.
 - That Zigbee command success implies light output. It does not. This misled the
   project repeatedly: a claimed output change needs visual confirmation on a
   fixture with LEDs, or direct PWM-register evidence.

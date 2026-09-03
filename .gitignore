@@ -120,3 +120,8 @@ venv/
 .idea/
 *.swp
 .DS_Store
+HANDOFF_*.md
+
+# Local staging area for source media and scratch links. The published,
+# size-reduced copies of anything from here live in media/ and are tracked.
+/Docs/
