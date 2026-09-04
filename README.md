@@ -47,6 +47,13 @@ The firmware itself lives in a separate checkout:
 — a fork of [doctor64/tuyaZigbee](https://github.com/doctor64/tuyaZigbee), which
 is the upstream project this work builds on.
 
+**Prebuilt firmware** is published as
+[releases on that fork](https://github.com/s0meguy1/tuyaZigbee/releases) — two
+containers per build (one for updating an already-converted fixture, one for
+converting a stock one) plus a `SHA256SUMS` to verify against. Binaries are not
+committed to git: a rebuild of identical sources differs in its date code and
+CRC, so a committed image would stop matching what is actually deployed.
+
 **If you want to convert a stock device over the air, read
 [`docs/moes_ts0505b_conversion.md`](https://github.com/s0meguy1/tuyaZigbee/blob/main/docs/moes_ts0505b_conversion.md)
 first.**

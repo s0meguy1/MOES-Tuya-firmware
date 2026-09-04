@@ -125,3 +125,13 @@ HANDOFF_*.md
 # Local staging area for source media and scratch links. The published,
 # size-reduced copies of anything from here live in media/ and are tracked.
 /Docs/
+
+# Floor/room layout maps. These pair full device addresses with the physical
+# room they sit in, and additionally carry Shelly MACs and LAN IPs — exactly
+# the material the firmware checkout's publication guard exists to catch.
+*_layout.md
+House_layout.md
+
+# Preserved copies of firmware images pulled from a fixture during a failure
+# investigation. Evidence, never distributable.
+/forensics-archive/
