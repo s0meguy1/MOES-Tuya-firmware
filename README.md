@@ -27,6 +27,33 @@ Fifteen effects, a 32-step cue list the chip plays by itself, and per-fixture
 phase offsets so one broadcast becomes a chase across a room. Full reference:
 [`docs/light_show.md`](https://github.com/s0meguy1/tuyaZigbee/blob/main/docs/light_show.md).
 
+## Build 44, one day after 43
+
+Removing the converter's dimming caps exposed a bug that had been in the
+firmware since build 40 and that the caps had been hiding: a turn-on to a dim
+level with a fade blinked once and stayed dark, because the "reached minimum,
+switch off" rule fired on the way *up*. Build 44 applies that rule only to fades
+heading down. Everything else is build 43. The firmware README explains it in
+full.
+
+## New in build 43
+
+- **Shows stored on the chip.** Four flash slots per fixture. Save an uploaded
+  cue list once and it survives power cuts; slot 0 reloads itself at power-up,
+  and one group frame recalls and starts a stored show on every fixture together.
+- **A fade to off ends at black.** Calibrated photometry showed this driver hits
+  full output at about a third of its PWM range, so the factory 1% floor is 5.7%
+  of full light and every fade used to sit there and then cut. The output now
+  ramps below the floor to black. Steady brightness levels are untouched.
+- **Faster show uploads.** Seven cue entries per frame instead of six.
+- **The dimming caps in the Zigbee2MQTT converter are gone.** A brightness of 1
+  is sent as 1 and transitions are honoured as given; the bottom of the range was
+  measured steady to 0.05%. (Removing them exposed a firmware bug in turning on
+  to a dim level with a fade; build 44 fixes it, and until it is everywhere the
+  converter shortens only that one kind of transition.)
+- The measurements behind all of this are in [`bench_photometry/`](bench_photometry/),
+  raw data included.
+
 ## The hardware
 
 No affiliation, no referral codes — these are here so you can check you have the
