@@ -197,3 +197,19 @@ A "stage colour without applying" path would make blackout-to-colour transitions
 from the network to the chip, which is where it belongs — the engine already renders at 50 fps
 and the coordinator manages 1.55 commands per second. Item 1 (fixture index) is a close second,
 because it is the difference between "nineteen fixtures" and "a lighting rig".
+
+---
+
+## Hardening (added 2026-09-17)
+
+### H1. Sanity-check the calibration area at boot
+**Problem:** the SDK loads RF/ADC calibration values from the identity block at
+`0xFB000+` and trusts them. pvvx's point in doctor64/tuyaZigbee#23: manufacturers
+don't actually calibrate these, and a module that arrives with garbage there
+would run the firmware with a detuned radio while looking perfectly healthy.
+Every unit converted so far shipped with plausible values, which proves nothing
+about the next batch.
+
+**Ask:** validate the calibration fields against plausible ranges before the
+stack uses them and fall back to the SDK defaults (logging a boot-reason
+breadcrumb) when they are out of range. Never write to that block.
