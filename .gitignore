@@ -135,3 +135,14 @@ House_layout.md
 # Preserved copies of firmware images pulled from a fixture during a failure
 # investigation. Evidence, never distributable.
 /forensics-archive/
+
+# Staged GitHub release assets, regenerated from build-NN/light/
+release-b*/
+
+# Per-session agent state: private notes with device addresses and bench paths
+.agent-state/
+
+# Vendor specification PDFs: not ours to redistribute
+zt3l_docs/*.pdf
+
+__pycache__/
